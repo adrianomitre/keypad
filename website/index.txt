@@ -1,0 +1,74 @@
+h1. keypad
+
+h3. words &harr; phone keypad digits
+
+h2. What
+
+The Keypad module provides methods to determine
+all sequences of letters associated to a given number
+according to standard phone keypad. The "inverse" function,
+i.e., find the digits corresponding to a certain word,
+is also provided.
+
+h2. Installing
+
+<pre syntax="ruby">sudo gem install keypad</pre>
+
+h2. The basics
+
+<pre syntax="ruby">
+Keypad::words(228)  #=>  ["aat", "aau", "aav", "abt", "abu", "abv", "act", \
+  #                     "acu", "acv", "bat", "bau", "bav", "bbt", "bbu", \
+  #                     "bbv", "bct", "bcu", "bcv", "cat", "cau", "cav", \
+  #                     "cbt", "cbu", "cbv", "cct", "ccu", "ccv"]
+Keypad::number("cat")  #=>  "228"
+</pre>
+
+h2. Demonstration of usage
+
+<pre syntax="ruby">
+dict = %w{ act balloon bat cat dentist }
+valid_words = []
+Keypad::words(228) {|w| valid_words << w if dict.include? w }
+valid_words  #=>  ["act", "bat", "cat"]
+
+desired_words = %w{ rubylang loveruby rubybest }
+available_numbers = [56837829, 54321987].map {|n| n.to_s }
+desired_words.select { |w| free_numbers.include? Keypad.number(w) } #=>  ["loveruby"]
+</pre>
+
+For more examples and details, see the RDoc-generated documentation "here":doc/index.html.
+
+h2. How to submit patches
+
+Read the "8 steps for fixing other people's code":http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/ and for section "8b: Submit patch to Google Groups":http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/#8b-google-groups, use the Google Group above.
+
+You can fetch the source from:
+
+* github: "http://github.com/adrianomitre/keypad/tree/master":http://github.com/adrianomitre/keypad/tree/master
+
+<pre>git clone git@github.com:adrianomitre/keypad.git</pre>
+
+h3. Build and test instructions
+
+<pre>cd keypad
+rake test
+rake install_gem</pre>
+
+
+h2. License
+
+This code is free to use under the terms of the MIT license. 
+
+h2. Contact
+
+Comments are welcome. Send an email to "Adriano Mitre":mailto:adriano.mitre@gmail.com.
+
+<div align=right>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="9ABWULT73Y7AC">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+</div>

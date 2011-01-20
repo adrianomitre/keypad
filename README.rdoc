@@ -1,27 +1,58 @@
 = keypad
 
-* http://github.com/#{github_username}/#{project_name}
+* http://github.com/adrianomitre/keypad
 
 == DESCRIPTION:
 
-FIX (describe your package)
-
-== FEATURES/PROBLEMS:
-
-* FIX (list of features or problems)
+It provides methods to determine all sequences of letters corresponding to a
+given sequence of digits according to the standard phone keypad. The "inverse"
+function is also provided, which finds the digits associated to a certain word.
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+The Keypad::words method determine all sequences of letters (not necessarily
+valid words in any specific languages) associated to a given sequence of digits
+according to standard phone keypad.
+
+If a dictionary is available, filtering out invalid words is
+as trivial as
+   
+  valid_words = Keypad::words(_number_).select {|w| _dictionary_.includes? w }
+
+or
+
+  valid_words = []
+  Keypad::words(_number_) do {|w| valid_words << w if _dictionary_.includes? w }
+
+which avoids explict pre-computation of the cartesian product array.
+
+Finally, the converse functionality is also provided. The Keypad::number method
+finds the sequences of digits associated with a given word according to standard
+phone keypad.
+
+== FEATURES:
+
+* Tested with all major Ruby implementations (see History.rdoc for the listing).
 
 == REQUIREMENTS:
 
-* [cartesian](http://adrianomitre.github.com/cartesian/)
-* Any mature Ruby interpreter (see History.txt for details).
+* {cartesian gem}[http://adrianomitre.github.com/cartesian/website/index.html]
 
 == INSTALL:
 
 * sudo gem install keypad
+
+== REFERENCES
+
+Similar systems and more information can be found at
+* PhoneSpell -- http://www.phonespell.org
+* DialABC -- http://www.dialabc.com
+
+== ACKOWLEDGEMENTS
+
+I was driven to coding this after reading the beggining of
+a post entitled "Google Splash" from Ernest Turro's blog.
+One can read the post [here](http://ernest.turro.cat/blog/2006/08/25/google-splash).
 
 == LICENSE:
 

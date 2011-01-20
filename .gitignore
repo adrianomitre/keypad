@@ -1,6 +1,6 @@
-Keypad_old/*
 coverage/*
 pkg/*
 doc/*
+website/doc/*
+website/index.html
 *.rbc
-

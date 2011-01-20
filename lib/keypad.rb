@@ -1,47 +1,8 @@
 require 'cartesian'
 
-=begin
-  == Description
-
-  The Keypad module provides methods to determine
-  all sequences of letters associated to a given number
-  according to standard phone keypad. The "inverse" function,
-  i.e., find the digits corresponding to a certain word,
-  is also provided.
-
-  == Author
-
-  Adriano Brito Mitre <adriano.mitre@gmail.com>
-
-  == Ackowledgements
-
-  I was driven to coding this after reading the beggining of
-  a post entitled "Google Splash" from Ernest Turro's blog.
-  One can read the post [here](http://ernest.turro.cat/blog/2006/08/25/google-splash).
-
-  The Keypad module determine all sequences of letters (not necessarily
-  valid words) associated to a given number using according to
-  standard phone keypad.
-
-  If a dictionary is available, filtering out invalid words is
-  as trivial as
-     
-     Keypad::words(_number_).select{|word| _dictionary_.includes? word }
-
-  Finally, the converse functionality is also provided.
-  The _number_ method finds the sequences of digits associated
-  with a given word according to standard phone keypad.
-
-  == References
-
-  Similar systems and more information can be found at
-    * [PhoneSpell](http://www.phonespell.org)
-    * [DialABC](http://www.dialabc.com)
-=end
-
 module Keypad
 
-  VERSION = '1.0.2'
+  VERSION = '1.1.0'
 
   #--
   # TODO: Find a way of preventing RDoc from linking the words
@@ -58,13 +19,20 @@ module Keypad
   #                           "bbv", "bct", "bcu", "bcv", "cat", "cau", "cav",
   #                           "cbt", "cbu", "cbv", "cct", "ccu", "ccv"]
   #
-  def Keypad.words(number)
-    letter_seq = letters_per_digit(number)
-    words = letter_seq.shift
-    letter_seq.each do |seq|
-      words = Cartesian::joined_product( words, seq )
+  # A block may be given, in which case the explicit pre-computing of the
+  # whole cartesian product is avoided.
+  #
+  #   dict = %w{ act balloon bat cat dentist }
+  #   Keypad::words(228) {|w| valid_words << w if dict.include? w } #=> ["act", "bat", "cat"]
+  #
+  def self.words(number)
+    digits = number.to_s.split('')
+    iter = digits[1..-1].inject(letters(digits[0])) {|s,k| letters(k).left_product(s) }
+    if block_given?
+      iter.each {|*elem| yield(elem.join) }
+    else
+      iter.map {|*elem| elem.join }
     end
-    words
   end
 
   #--

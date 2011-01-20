@@ -1,0 +1,8 @@
+* Do the same Keypad -> keypad as Cartesian -> cartesian,
+  including a last Keypad version which includes a dependency to keypad.
+
+* Create the keypad site and change the link in the first section of README.rdoc (= cartesian)
+
+* Mention in the docs (History, README) the new, efficient Keypad.words implementation,
+  that accepts a block when no pre-computation of the whole cartesian array is wanted.
+

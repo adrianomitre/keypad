@@ -7,6 +7,13 @@ class TestKeypad < Test::Unit::TestCase
                 "bbv", "bct", "bcu", "bcv", "cat", "cau", "cav",
                 "cbt", "cbu", "cbv", "cct", "ccu", "ccv"]
     assert_equal words228, Keypad::words(228)
+    dict = %w{ act balloon bat cat dentist }
+    valid_words = []
+    assert_nothing_raised do
+      Keypad::words(228) {|w| valid_words << w if dict.include? w }
+    end
+    expected = %w{ act bat cat }
+    assert_equal expected, valid_words
   end
 
   def test_number

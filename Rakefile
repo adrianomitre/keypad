@@ -9,8 +9,6 @@ require 'hoe'
 Hoe.spec 'retroactive_module_inclusion' do
   developer('Adriano Mitre', 'adriano.mitre@gmail.com')
   
-  self.version = '1.0.1' # FIX, FIXME: remove this! Include the constant in the module itself!
-  
   self.post_install_message = 'PostInstall.txt' # FIX, FIXME, TODO remove if post-install message not required
   self.rubyforge_name       = self.name # FIX, FIXME, TODO this is default value
   self.extra_deps         = [['cartesian','>= 0.5.0']]

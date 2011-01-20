@@ -1,4 +1,4 @@
-=== 1.1.0 2011-01-10
+=== 1.1.0 2011-01-?? FIX, FIXME
 
 * 1 major enhancement:
   * new functionality: a block may be given to Keypad::words, preventing the

@@ -35,12 +35,13 @@ task :chdir do
   Dir.chdir File.dirname(File.expand_path(__FILE__))
 end
 
-task :render_docs => [:chdir] do
-  system %q{ rm -rf doc/ }
-  system %q{ rdoc README.rdoc lib/*.rb }
+task :render_website => [:chdir, :docs] do
+  system %q{ script/txt2html website/index.txt website/template.html.erb > website/index.html }
+  rm_rf 'website/doc'
+  cp_r 'doc/', 'website/'
 end
 
-task :render_website => [:chdir, :docs] do |t|
-  system %q{ script/txt2html website/index.txt website/template.html.erb > website/index.html }
-  system %q{ rm -rf website/doc; cp -R doc website }
+task :clean_all => [:clean, :chdir] do
+  rm_rf 'website/index.html'
+  rm_rf 'website/doc/'
 end

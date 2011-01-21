@@ -52,7 +52,7 @@ Similar systems and more information can be found at
 
 I was driven to coding this after reading the beggining of
 a post entitled "Google Splash" from Ernest Turro's blog.
-One can read the post [here](http://ernest.turro.cat/blog/2006/08/25/google-splash).
+One can read the post {here}[http://ernest.turro.cat/blog/2006/08/25/google-splash].
 
 == LICENSE:
 

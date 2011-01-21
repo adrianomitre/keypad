@@ -44,7 +44,7 @@ module Keypad
   #
   #   Keypad::number("cat") #=> "228"
   #
-  def Keypad.number(word)
+  def self.number(word)
     ary = word.downcase.split('').map do |letter|
             case letter
             when 'a'..'c' then 2
@@ -66,7 +66,7 @@ module Keypad
   #
   #   Keypad::letters(9) #=> ["w", "x", "y", "z"]
   #
-  def Keypad.letters(digit)
+  def self.letters(digit)
     case digit.to_i
       when 2 then %w(a b c)
       when 3 then %w(d e f)
@@ -86,7 +86,7 @@ module Keypad
   #   Keypad::letters_per_digit(23) #=> [["a", "b", "c"], ["d", "e", "f"]]
   #   Keypad::letters_per_digit(0, 12, 3) #=> [[], [], ["a", "b", "c"], ["d", "e", "f"]], 
   #
-  def Keypad.letters_per_digit(*numbers)
+  def self.letters_per_digit(*numbers)
     result = []
     numbers.each do |number|
       number.to_s.split('').each do |digit|
